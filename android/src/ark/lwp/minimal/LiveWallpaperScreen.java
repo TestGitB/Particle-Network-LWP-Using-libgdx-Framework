@@ -65,8 +65,8 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
         camera.position.set(camera.viewportWidth*2 , camera.viewportHeight*2 , 0);
 
         textureBg = new Texture("background.jpg");
-        textureBg.setFilter(TextureFilter.Linear, TextureFilter.Linear);
-        background = new TextureRegion(textureBg, 0, 0, 1080, 1920);
+        //textureBg.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        //background = new TextureRegion(textureBg, 0, 0, 1080, 1920);
         batcher = new SpriteBatch();
         logger = new FPSLogger();
 
@@ -165,11 +165,12 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
 
-        logger.log();
+        //logger.log();
         batcher.begin();
         debugRenderer.render(world,batcher.getProjectionMatrix());
-        debugRenderer.setDrawAABBs(true);
-        //batcher.draw(textureBg,0,0);
+
+        //debugRenderer.setDrawAABBs(true);
+        batcher.draw(textureBg,0,0);
         camera.update();
         batcher.end();
 
