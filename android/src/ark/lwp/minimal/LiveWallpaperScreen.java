@@ -49,7 +49,7 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
     SpriteBatch batcher;
     World world;
     Box2DDebugRenderer debugRenderer;
-    ShapeRenderer sr;
+    ShapeRenderer sr,sr2;
     Body body[];
     Body border;
     BodyDef bodyDef;
@@ -73,10 +73,11 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
 
         world = new World(new Vector2(0, 0), true);
         debugRenderer = new Box2DDebugRenderer();
+        debugRenderer.setDrawBodies(true);
         //debugRenderer.setDrawVelocities(true);
 
         sr = new ShapeRenderer();
-
+        sr2=new ShapeRenderer();
         bodyDef = new BodyDef();
 // We set our body to dynamic, for something like ground which doesn't move we would set it to StaticBody
         bodyDef.type = BodyDef.BodyType.DynamicBody;
@@ -188,6 +189,10 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
 
        for (int i=0;i<30;i++)
        {
+           sr2.begin(ShapeRenderer.ShapeType.Filled);
+           sr2.setColor(Color.WHITE);
+           sr2.circle(body[i].getPosition().x,body[i].getPosition().y ,5);
+           sr2.end();
            for(int j=0;j<30;j++)
            if(body[i].getPosition().dst(body[j].getPosition())<300)
            {
