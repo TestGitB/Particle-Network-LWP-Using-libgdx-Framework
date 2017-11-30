@@ -1,6 +1,6 @@
 android {
-    buildToolsVersion '25.0.0'
-    compileSdkVersion 20
+    buildToolsVersion '27.0.1'
+    compileSdkVersion 25
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -130,7 +130,7 @@ idea {
         }
     }
 }
-    dependencies
-            {
-        compile 'com.android.support:appcompat-v7:20.0.0'
-            }
+dependencies
+        {
+            compile 'com.android.support:appcompat-v7:25.0.0'
+        }

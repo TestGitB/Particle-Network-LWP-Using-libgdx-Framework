@@ -1,35 +1,25 @@
 package ark.lwp.minimal;
 
-import android.graphics.drawable.shapes.RectShape;
 import android.util.Log;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.particles.ParticleSorter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.ChainShape;
 import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.EdgeShape;
-import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.Shape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 
@@ -45,12 +35,12 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
 
     OrthographicCamera camera;
     Texture textureBg;
-    TextureRegion background;
     SpriteBatch batcher;
     World world;
     Box2DDebugRenderer debugRenderer;
     ShapeRenderer sr,sr2;
     Body body[];
+    int particle_count;
     Body border;
     BodyDef bodyDef;
     FixtureDef fixtureDef;
@@ -58,10 +48,16 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
     Color color;
     ColorAction colorAction;
 
+
+    //Resolution of device
+    int max_height=Gdx.graphics.getHeight();
+    int max_width=Gdx.graphics.getWidth();
+
     public LiveWallpaperScreen(final Game game) {
         this.game = game;
-        body = new Body[30];
-        camera = new OrthographicCamera(720, 1280);
+        particle_count=30;
+        body = new Body[particle_count];
+        camera = new OrthographicCamera(max_width, max_height);
         camera.position.set(camera.viewportWidth*2 , camera.viewportHeight*2 , 0);
 
         textureBg = new Texture("b.jpg");
@@ -93,12 +89,12 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
         fixtureDef.restitution = 1f; // Make it bounce a little bit
 
 // Create our fixture and attach it to the body
-        for (int i = 0; i < 30; i++) {
-            circle.setRadius(random(3, 10));
+        for (int i = 0; i < particle_count; i++) {
+            circle.setRadius(random(8, 15));
             body[i] = world.createBody(bodyDef);
 
             body[i].createFixture(fixtureDef);
-            bodyDef.position.set(random(1, 710), random(4, 1270));
+            bodyDef.position.set(random(1, max_width-10), random(4, max_height-10));
 
             body[i].setLinearVelocity(random(-400,400), random(-400,400));
             Log.d("Velocity of ", i + " " + String.valueOf(body[i].getLinearVelocity()));
@@ -111,7 +107,7 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
         FixtureDef fixtureDef2=new FixtureDef();
         bodyDef2.position.set(0, 0);
         ChainShape b=new ChainShape();
-        b.createLoop(new Vector2[]{new Vector2(-50,-50),new Vector2(-50,1330),new Vector2(770,1330),new Vector2(770,-50)});
+        b.createLoop(new Vector2[]{new Vector2(-50,-50),new Vector2(-50,max_height+50),new Vector2(max_width+50,max_height+50),new Vector2(max_width+50,-50)});
         border = world.createBody(bodyDef2);
         fixtureDef2.density=0f;
         fixtureDef2.friction=0f;
@@ -135,8 +131,6 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
         colorAction.setColor(color);
         colorAction.setDuration(15);
         colorAction.setEndColor(Color.WHITE);
-
-
     }
 
     @Override
@@ -161,7 +155,7 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
     {
         //colorAction.act(1f/120f);
 
-        world.step(1f/360f, 6, 2);
+        world.step(delta, 6, 2);
         gl.glClearColor(color.r, color.g, color.b, color.a);
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
@@ -180,44 +174,46 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
         camera.update();
         batcher.end();
 
+        logger.log();
         Gdx.gl.glEnable(GL10.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
         //sr.setColor(1,1,1,0.1f);
         sr.setProjectionMatrix(batcher.getProjectionMatrix());
         sr.begin(ShapeRenderer.ShapeType.Line);
+        sr2.begin(ShapeRenderer.ShapeType.Filled);
+        sr2.setColor(Color.WHITE);
 
-       for (int i=0;i<30;i++)
+        for (int i=0;i<particle_count;i++)
        {
-           sr2.begin(ShapeRenderer.ShapeType.Filled);
-           sr2.setColor(Color.WHITE);
-           sr2.circle(body[i].getPosition().x,body[i].getPosition().y ,5);
-           sr2.end();
-           for(int j=0;j<30;j++)
-           if(body[i].getPosition().dst(body[j].getPosition())<300)
+           sr2.circle(body[i].getPosition().x,body[i].getPosition().y ,body[i].getFixtureList().first().getShape().getRadius());
+
+           for(int j=0;j<particle_count;j++)
+           if(body[i].getPosition().dst(body[j].getPosition())<600 &&i!=j)
            {
                float dist=body[i].getPosition().dst(body[j].getPosition());
-               sr.line(body[i].getPosition().x, body[i].getPosition().y, body[j].getPosition().x, body[j].getPosition().y, new Color(1,1,1,1-(dist/250)),new Color(0,0,0,1-(dist/250)));
+               sr.line(body[i].getPosition().x, body[i].getPosition().y, body[j].getPosition().x, body[j].getPosition().y, new Color(1,1,1,1-(dist/250)),new Color(0,0,0,1-(dist/550)));
            }
        }
 
         if(Gdx.input.isTouched())
         {
             Log.d("is touched",String.valueOf(Gdx.input.getX())+" "+String.valueOf(Gdx.input.getY()));
-            Vector2 pos=new Vector2(Gdx.input.getX(),abs(Gdx.input.getY()-1280));
+            Vector2 pos=new Vector2(Gdx.input.getX(),abs(Gdx.input.getY()-max_height));
 
-            for (int i=0;i<30;i++)
+            for (int i=0;i<particle_count;i++)
             {
-                if (body[i].getPosition().dst(pos) < 600)
+                if (body[i].getPosition().dst(pos) < 900)
                 {
                     float dist = body[i].getPosition().dst(pos);
-                    sr.line(body[i].getPosition().x, body[i].getPosition().y, pos.x, pos.y, new Color(1, 1, 1, 1 - (dist / 500)), new Color(0, 0, 0, 1 - (dist / 500)));
+                    sr.line(body[i].getPosition().x, body[i].getPosition().y, pos.x, pos.y, new Color(1, 1, 1, 1 - (dist / 500)), new Color(0, 0, 0, 1 - (dist / 800)));
                 }
             }
 
 
         }
         sr.end();
+        sr2.end();
         Gdx.gl.glDisable(GL10.GL_BLEND);
     }
 
