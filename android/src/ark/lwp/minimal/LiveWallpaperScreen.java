@@ -1,9 +1,12 @@
 package ark.lwp.minimal;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -25,11 +28,12 @@ import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import static android.content.Context.MODE_PRIVATE;
 import static com.badlogic.gdx.Gdx.gl;
 import static com.badlogic.gdx.math.MathUtils.random;
 import static java.lang.Math.abs;
 
-public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListener {
+public class LiveWallpaperScreen  implements Screen,GestureDetector.GestureListener {
     Game game;
     FPSLogger logger;
 
@@ -55,7 +59,11 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
 
     public LiveWallpaperScreen(final Game game) {
         this.game = game;
-        particle_count=30;
+
+
+        final java.util.prefs.Preferences p= java.util.prefs.Preferences.systemRoot();
+       //Preferences pref = Gdx.app.getPreferences("MyPref");
+        particle_count=SettingsPref.size;
         body = new Body[particle_count];
         camera = new OrthographicCamera(max_width, max_height);
         camera.position.set(camera.viewportWidth*2 , camera.viewportHeight*2 , 0);
@@ -90,7 +98,7 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
 
 // Create our fixture and attach it to the body
         for (int i = 0; i < particle_count; i++) {
-            circle.setRadius(random(8, 15));
+            circle.setRadius(4);
             body[i] = world.createBody(bodyDef);
 
             body[i].createFixture(fixtureDef);
@@ -155,7 +163,7 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
     {
         //colorAction.act(1f/120f);
 
-        world.step(delta, 6, 2);
+        world.step(1f/360f, 6, 2);
         gl.glClearColor(color.r, color.g, color.b, color.a);
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 
@@ -189,10 +197,10 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
            sr2.circle(body[i].getPosition().x,body[i].getPosition().y ,body[i].getFixtureList().first().getShape().getRadius());
 
            for(int j=0;j<particle_count;j++)
-           if(body[i].getPosition().dst(body[j].getPosition())<600 &&i!=j)
+           if(body[i].getPosition().dst(body[j].getPosition())<300 &&i!=j)
            {
                float dist=body[i].getPosition().dst(body[j].getPosition());
-               sr.line(body[i].getPosition().x, body[i].getPosition().y, body[j].getPosition().x, body[j].getPosition().y, new Color(1,1,1,1-(dist/250)),new Color(0,0,0,1-(dist/550)));
+               sr.line(body[i].getPosition().x, body[i].getPosition().y, body[j].getPosition().x, body[j].getPosition().y, new Color(1,1,1,1-(dist/250)),new Color(0,0,0,1-(dist/250)));
            }
        }
 
@@ -203,10 +211,10 @@ public class LiveWallpaperScreen implements Screen,GestureDetector.GestureListen
 
             for (int i=0;i<particle_count;i++)
             {
-                if (body[i].getPosition().dst(pos) < 900)
+                if (body[i].getPosition().dst(pos) < 500)
                 {
                     float dist = body[i].getPosition().dst(pos);
-                    sr.line(body[i].getPosition().x, body[i].getPosition().y, pos.x, pos.y, new Color(1, 1, 1, 1 - (dist / 500)), new Color(0, 0, 0, 1 - (dist / 800)));
+                    sr.line(body[i].getPosition().x, body[i].getPosition().y, pos.x, pos.y, new Color(1, 1, 1, 1 - (dist / 400)), new Color(0, 0, 0, 1 - (dist / 400)));
                 }
             }
 

@@ -19,6 +19,8 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         config.useAccelerometer = false;
         config.getTouchEventsForLiveWallpaper = true;
 
+        SettingsPref pref=new SettingsPref(getApplicationContext());
+        pref.get_size();
         ApplicationListener listener = new LiveWallpaperStarter();
         initialize(listener, config);
     }
