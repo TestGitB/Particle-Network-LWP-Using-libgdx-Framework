@@ -8,6 +8,7 @@ import com.badlogic.gdx.backends.android.AndroidWallpaperListener;
 
 public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
+    SettingsPref pref;
     @Override
     public void onCreateApplication () {
         super.onCreateApplication();
@@ -19,16 +20,16 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         config.useAccelerometer = false;
         config.getTouchEventsForLiveWallpaper = true;
 
-        SettingsPref pref=new SettingsPref(getApplicationContext());
+        pref=new SettingsPref(getApplicationContext());
         pref.get_size();
         ApplicationListener listener = new LiveWallpaperStarter();
         initialize(listener, config);
     }
 
-    public static class MyLiveWallpaperListener extends LiveWallpaperScreen implements AndroidWallpaperListener {
-
+    public class MyLiveWallpaperListener extends LiveWallpaperScreen implements AndroidWallpaperListener {
         public MyLiveWallpaperListener(Game game) {
             super(game);
+            pref.get_size();
             // TODO Auto-generated constructor stub
         }
 
@@ -39,6 +40,8 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
         @Override
         public void previewStateChange (boolean isPreview) {
+
+            pref.get_size();
             //Log.i("LiveWallpaper test", "previewStateChange(isPreview:"+isPreview+")");
         }
     }

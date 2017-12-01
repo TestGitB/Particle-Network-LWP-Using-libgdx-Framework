@@ -143,6 +143,7 @@ public class LiveWallpaperScreen  implements Screen,GestureDetector.GestureListe
 
     @Override
     public void dispose() {
+
         // TODO Auto-generated method stub
 
     }

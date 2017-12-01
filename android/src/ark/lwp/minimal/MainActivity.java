@@ -37,21 +37,14 @@ public class MainActivity extends AppCompatActivity{
 
 
         t=(EditText)findViewById(R.id.edittext);
+        t.setText(String.valueOf(pref.get_size()));
         b=(Button)findViewById(R.id.button);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int x=Integer.parseInt(t.getText().toString());
-             //   pref.putInteger("size",x);
-               // p.putInt("size",x);
-
                 pref.set_size(x);
-                Intent i=new Intent(MainActivity.this,LiveWallpaperAndroid.class);
-                i.setAction(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
-                String pkg = WallpaperService.class.getPackage().getName();
-                String cls = WallpaperService.class.getCanonicalName();
-                i.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(pkg, cls));
-                startService(i);
+
             }
         });
 
