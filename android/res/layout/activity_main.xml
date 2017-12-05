@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible"
+    android:theme="@style/GdxTheme"
     android:background="#FFFFFF"
     tools:context="ark.lwp.minimal.MainActivity">
 
@@ -14,15 +15,16 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:elevation="10dp"
-        android:minHeight="?android:attr/actionBarSize" />
+        android:minHeight="?android:attr/actionBarSize" >
+    </android.support.v7.widget.Toolbar>
 
     <EditText
         android:id="@+id/edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp"
+        android:layout_alignBaseline="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="47dp"
         android:hint="Number of particles"
         android:inputType="number" />
 
@@ -30,9 +32,65 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="220dp"
+        android:layout_marginBottom="23dp"
         android:text="Save" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="76dp"
+        android:text="Number of particles"
+        android:textSize="19sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="121dp"
+        android:text="Velocity"
+        android:textSize="18sp" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" />
+
+    <Button
+        android:id="@+id/img_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="231dp"
+        android:text="Select Background" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="236dp"
+        android:text="Particle Color"
+        android:textSize="19sp"/>
+
+    <Button
+        android:id="@+id/colorb"
+        android:layout_width="58dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="220dp" />
 
 </android.widget.RelativeLayout>

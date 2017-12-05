@@ -11,6 +11,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SettingsPref {
      static int size=30;
+     static int velocity=300;
+
+     static String path="0";
+     static String color="#FFFFFFFF";
      SharedPreferences pref;
      SharedPreferences.Editor editor;
      SettingsPref(Context context) {
@@ -30,5 +34,39 @@ public class SettingsPref {
           size=pref.getInt("size",30);
           return size;
      }
+     void set_velocity(int x)
+     {
+          editor.putInt("velocity",x);
+          editor.commit();
+          velocity=x;
+     }
+     int get_velocity()
+     {
+          velocity=pref.getInt("velocity",300);
+          return velocity;
+     }
 
+     void set_path(String x)
+     {
+          editor.putString("path",x);
+          editor.commit();
+          path=x;
+     }
+     String get_path()
+     {
+          path=pref.getString("path","0");
+          return path;
+     }
+
+     void set_color(String x)
+     {
+          editor.putString("color",x);
+          editor.commit();
+          color=x;
+     }
+     String get_color()
+     {
+          color=pref.getString("color","#FFFFFFFF");
+          return color;
+     }
 }

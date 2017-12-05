@@ -1,9 +1,8 @@
 <resources>
 
-    <style name="GdxTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="GdxTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">#8BA6A9</item>
         <item name="colorPrimaryDark">#A7CECB</item>
     </style>
-
 
 </resources>

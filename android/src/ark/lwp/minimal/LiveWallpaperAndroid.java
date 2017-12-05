@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidLiveWallpaperService;
 import com.badlogic.gdx.backends.android.AndroidWallpaperListener;
+import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 
 public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
@@ -22,6 +23,9 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
         pref=new SettingsPref(getApplicationContext());
         pref.get_size();
+        pref.get_velocity();
+        pref.get_path();
+        pref.get_color();
         ApplicationListener listener = new LiveWallpaperStarter();
         initialize(listener, config);
     }
@@ -30,6 +34,9 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         public MyLiveWallpaperListener(Game game) {
             super(game);
             pref.get_size();
+            pref.get_velocity();
+            pref.get_path();
+            pref.get_color();
             // TODO Auto-generated constructor stub
         }
 
@@ -42,6 +49,9 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         public void previewStateChange (boolean isPreview) {
 
             pref.get_size();
+            pref.get_velocity();
+            pref.get_path();
+            pref.get_color();
             //Log.i("LiveWallpaper test", "previewStateChange(isPreview:"+isPreview+")");
         }
     }

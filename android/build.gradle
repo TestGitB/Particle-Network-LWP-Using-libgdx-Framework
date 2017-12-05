@@ -1,6 +1,11 @@
+//noinspection GradleCompatible
 android {
     buildToolsVersion '27.0.1'
     compileSdkVersion 25
+    repositories {
+        maven { url "https://jitpack.io" }
+        jcenter()
+    }
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -95,7 +100,7 @@ eclipse {
         sourceCompatibility = 1.6
         targetCompatibility = 1.6
     }
-        classpath {plusConfigurations +=[project.configurations.compile]        
+        classpath {plusConfigurations +=[ project.configurations.compile]        
         containers 'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK', 'com.android.ide.eclipse.adt.LIBRARIES'       
     }
 
@@ -122,7 +127,7 @@ idea {
                 builder.current = node;
                 builder.component(name: "FacetManager") {
                     facet(type: "android", name: "Android") {
-                        configuration { option(name:"UPDATE_PROPERTY_FILES" , value:"true")
+                            configuration { option(name: "UPDATE_PROPERTY_FILES" , value:"true")
                         }
                     }
                 }
@@ -132,6 +137,13 @@ idea {
 }
 dependencies
         {
+            implementation 'com.android.support:support-v13:25.0.0'
+            implementation 'com.android.support.constraint:constraint-layout:1.0.2'
             compile 'com.android.support:appcompat-v7:25.0.0'
+            compile 'com.zhihu.android:matisse:0.4.3'
+            compile 'com.github.QuadFlask:colorpicker:0.0.13'
+            compile 'com.pes.materialcolorpicker:library:1.2.0'
+            compile 'com.github.bumptech.glide:glide:3.7.0'
+            // annotationProcessor 'com.github.bumptech.glide:compiler:3.7.0'
 
         }
