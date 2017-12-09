@@ -128,10 +128,9 @@ public class LiveWallpaperScreen  implements Screen {
         Gdx.gl.glEnable(GL10.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
-        //sr.setColor(1,1,1,0.1f);
         sr.setProjectionMatrix(batcher.getProjectionMatrix());
         sr.begin(ShapeRenderer.ShapeType.Filled);
-//      sr2.begin(ShapeRenderer.ShapeType.Filled);
+        sr2.begin(ShapeRenderer.ShapeType.Filled);
         sr2.setColor(color);
         sr.setColor(color);
 
