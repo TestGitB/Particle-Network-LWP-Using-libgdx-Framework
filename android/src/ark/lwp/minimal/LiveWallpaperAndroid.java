@@ -5,7 +5,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidLiveWallpaperService;
 import com.badlogic.gdx.backends.android.AndroidWallpaperListener;
-import com.badlogic.gdx.graphics.g3d.shaders.DefaultShader;
 
 public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
@@ -22,12 +21,20 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         config.getTouchEventsForLiveWallpaper = true;
 
         pref=new SettingsPref(getApplicationContext());
+        pref.get_thickness();
         pref.get_size();
         pref.get_velocity();
         pref.get_path();
         pref.get_color();
+        pref.get_back_color();
+        pref.get_radius();
+        pref.get_line_color();
+        pref.get_touch();
+        pref.get_line_length();
         ApplicationListener listener = new LiveWallpaperStarter();
         initialize(listener, config);
+
+
     }
 
     public class MyLiveWallpaperListener extends LiveWallpaperScreen implements AndroidWallpaperListener {
@@ -37,6 +44,12 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
             pref.get_velocity();
             pref.get_path();
             pref.get_color();
+            pref.get_back_color();
+            pref.get_radius();
+            pref.get_line_color();
+            pref.get_touch();
+            pref.get_line_length();
+            pref.get_thickness();
             // TODO Auto-generated constructor stub
         }
 
@@ -52,6 +65,12 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
             pref.get_velocity();
             pref.get_path();
             pref.get_color();
+            pref.get_back_color();
+            pref.get_radius();
+            pref.get_line_color();
+            pref.get_touch();
+            pref.get_line_length();
+            pref.get_thickness();
             //Log.i("LiveWallpaper test", "previewStateChange(isPreview:"+isPreview+")");
         }
     }

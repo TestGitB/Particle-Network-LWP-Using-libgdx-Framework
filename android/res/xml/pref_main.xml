@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout="@layout/activity_settings_pref"
+    >
+        <PreferenceCategory android:title="Save">
+        <Preference
+            android:key="save"
+            android:summary="Save current settings and set wallpaper."
+            android:title="Save and Set">
+
+        </Preference>
+        </PreferenceCategory>
+        <PreferenceCategory android:title="Particle Settings">
+            <com.jaredrummler.android.colorpicker.ColorPreference
+                android:defaultValue="0xFFFFFFFF"
+                android:key="particle_color"
+                android:summary="Select the color of the particles."
+                android:title="Particle Color" />
+            <com.jaredrummler.android.colorpicker.ColorPreference
+                android:defaultValue="0xFFFFFFFF"
+                android:key="line_color"
+                android:summary="Select the color of the line connecting particles."
+                android:title="Line Color" />
+
+            <com.pavelsikun.seekbarpreference.SeekBarPreference
+                android:key="particle_size"
+                android:title="Particle Size"
+                android:summary="Select the size of particles."
+                android:enabled="true"
+                android:defaultValue="5"
+
+                sample:msbp_minValue="1"
+                sample:msbp_maxValue="50"
+                sample:msbp_interval="1"
+                sample:msbp_measurementUnit=""
+                sample:msbp_dialogEnabled="true"/>
+
+
+            <com.pavelsikun.seekbarpreference.SeekBarPreference
+                android:key="particle_count"
+                android:title="Particle Count"
+                android:summary="Select the number of particles."
+                android:enabled="true"
+                android:defaultValue="30"
+
+                sample:msbp_minValue="1"
+                sample:msbp_maxValue="200"
+                sample:msbp_interval="10"
+                sample:msbp_measurementUnit=""
+                sample:msbp_dialogEnabled="true"/>
+
+            <com.pavelsikun.seekbarpreference.SeekBarPreference
+                android:key="particle_velocity"
+                android:title="Particle Velocity"
+                android:summary="Select the speed of particles."
+                android:enabled="true"
+                android:defaultValue="500"
+                sample:msbp_minValue="1"
+                sample:msbp_maxValue="1000"
+                sample:msbp_interval="10"
+                sample:msbp_measurementUnit=""
+                sample:msbp_dialogEnabled="true" />
+
+        </PreferenceCategory>
+        <PreferenceCategory android:title="Background Settings">
+            <Preference
+                android:key="image_bg"
+                android:summary="Select background image from gallery."
+                android:title="Background Image">
+
+            </Preference>
+
+            <com.jaredrummler.android.colorpicker.ColorPreference
+                android:defaultValue="0xFFFFFFFF"
+                android:key="color_bg"
+                android:summary="Select the background color."
+                android:title="Background Color" />
+
+        </PreferenceCategory>
+
+        <PreferenceCategory android:title="Misc">
+            <SwitchPreference android:title="Touch Effect"
+                android:summary="Enable/Disable the touch effect."
+                android:key="touch_effect"
+                android:defaultValue="true">
+
+            </SwitchPreference>
+
+            <com.pavelsikun.seekbarpreference.SeekBarPreference
+                android:key="line_length"
+                android:title="Line Length"
+                android:summary="Select the length of connecting line."
+                android:enabled="true"
+                android:defaultValue="500"
+                sample:msbp_minValue="1"
+                sample:msbp_maxValue="2000"
+                sample:msbp_interval="10"
+                sample:msbp_measurementUnit=""
+                sample:msbp_dialogEnabled="true" />
+
+            <com.pavelsikun.seekbarpreference.SeekBarPreference
+                android:key="thick"
+                android:title="Line Thickness"
+                android:summary="Select the thickness of connecting line."
+                android:enabled="true"
+                android:defaultValue="1"
+                sample:msbp_minValue="1"
+                sample:msbp_maxValue="20"
+                sample:msbp_interval="1"
+                sample:msbp_measurementUnit=""
+                sample:msbp_dialogEnabled="true" />
+
+        </PreferenceCategory>
+</PreferenceScreen>

@@ -12,9 +12,14 @@ import static android.content.Context.MODE_PRIVATE;
 public class SettingsPref {
      static int size=30;
      static int velocity=300;
-
      static String path="0";
      static String color="#FFFFFFFF";
+     static String line_color="#FFFFFF";
+     static int radius=5;
+     static String back_color="0";
+     static int touch=1;
+     static int line_length =300;
+     static int thickness=1;
      SharedPreferences pref;
      SharedPreferences.Editor editor;
      SettingsPref(Context context) {
@@ -68,5 +73,83 @@ public class SettingsPref {
      {
           color=pref.getString("color","#FFFFFFFF");
           return color;
+     }
+
+     void set_back_color(String x)
+     {
+          editor.putString("back_color",x);
+          editor.commit();
+          back_color=x;
+     }
+     String get_back_color()
+     {
+          back_color=pref.getString("back_color","0");
+          return back_color;
+     }
+
+     void set_radius(int x)
+     {
+
+          editor.putInt("radius",x);
+          editor.commit();
+          radius=x;
+     }
+     int get_radius()
+     {
+          radius=pref.getInt("radius",5);
+          return radius;
+     }
+
+
+     void set_line_color(String x)
+     {
+          editor.putString("line_color",x);
+          editor.commit();
+          line_color=x;
+     }
+     String get_line_color()
+     {
+          line_color=pref.getString("line_color","#FFFFFFFF");
+          return line_color;
+     }
+
+     void set_touch(int x)
+     {
+
+          editor.putInt("touch",x);
+          editor.commit();
+          touch=x;
+     }
+     int get_touch()
+     {
+          touch=pref.getInt("touch",1);
+          return touch;
+     }
+
+
+     void set_line_length(int x)
+     {
+
+          editor.putInt("line_length",x);
+          editor.commit();
+          line_length=x;
+     }
+     int get_line_length()
+     {
+          line_length=pref.getInt("line_length",300);
+          return line_length;
+     }
+
+     void set_thickness(int x)
+     {
+
+          editor.putInt("thick",x);
+          editor.commit();
+          thickness=x;
+     }
+     int get_thickness()
+     {
+          thickness=pref.getInt("thick",30);
+          return thickness;
      }
 }
