@@ -208,6 +208,8 @@ public class LiveWallpaperScreen  implements Screen {
         Log.d("LWP resumed","True");
         max_height=Gdx.graphics.getHeight();
         max_width=Gdx.graphics.getWidth();
+        Particle.max_height=max_height;
+        Particle.max_width=max_width;
 
         particle_count=SettingsPref.size;
         velocity=SettingsPref.velocity;
@@ -219,17 +221,6 @@ public class LiveWallpaperScreen  implements Screen {
         camera = new OrthographicCamera(max_width, max_height);
         camera.position.set(camera.viewportWidth/2 , camera.viewportHeight/2 , 0);
         batcher = new SpriteBatch();
-
-
-        //////////////////////////new particle system//////////////////////
-        particle=new Particle[200];
-        for (int i=0;i<200;i++)
-        {
-            particle[i]=new Particle(max_width,max_height,velocity);
-        }
-
-
-
 
         if(SettingsPref.path.equals("0")) {
 

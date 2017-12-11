@@ -15,8 +15,8 @@ public class Particle {
     float y;
     float velocity;
     float angle;
-    int max_width;
-    int max_height;
+    static int max_width;
+    static int max_height;
 
     public Particle(int max_width,int max_height,float vel)
     {

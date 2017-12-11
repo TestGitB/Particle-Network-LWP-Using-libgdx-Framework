@@ -16,6 +16,7 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         super.onCreateApplication();
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+        config.numSamples=1;
         //config.useGL20 = false;
         config.useCompass = false;
         config.useWakelock = false;
