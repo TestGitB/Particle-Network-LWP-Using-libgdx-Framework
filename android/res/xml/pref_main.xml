@@ -15,12 +15,12 @@
         </PreferenceCategory>
         <PreferenceCategory android:title="Particle Settings">
             <com.jaredrummler.android.colorpicker.ColorPreference
-                android:defaultValue="0xFFFFFFFF"
+                android:defaultValue="0xFF000000"
                 android:key="particle_color"
                 android:summary="Select the color of the particles."
                 android:title="Particle Color" />
             <com.jaredrummler.android.colorpicker.ColorPreference
-                android:defaultValue="0xFFFFFFFF"
+                android:defaultValue="0xFF000000"
                 android:key="line_color"
                 android:summary="Select the color of the line connecting particles."
                 android:title="Line Color" />
@@ -74,7 +74,7 @@
             </Preference>
 
             <com.jaredrummler.android.colorpicker.ColorPreference
-                android:defaultValue="0xFFFFFFFF"
+                android:defaultValue="0xFF46A7F5"
                 android:key="color_bg"
                 android:summary="Select the background color."
                 android:title="Background Color" />
@@ -94,7 +94,6 @@
                 android:title="Line Length"
                 android:summary="Select the length of connecting line."
                 android:enabled="true"
-                android:defaultValue="500"
                 sample:msbp_minValue="1"
                 sample:msbp_maxValue="2000"
                 sample:msbp_interval="10"
@@ -106,7 +105,7 @@
                 android:title="Line Thickness"
                 android:summary="Select the thickness of connecting line."
                 android:enabled="true"
-                android:defaultValue="1"
+                android:defaultValue="2"
                 sample:msbp_minValue="1"
                 sample:msbp_maxValue="20"
                 sample:msbp_interval="1"

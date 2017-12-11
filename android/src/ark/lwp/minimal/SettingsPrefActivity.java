@@ -22,11 +22,15 @@ import android.widget.Toast;
 import com.jaredrummler.android.colorpicker.ColorPreference;
 import com.pavelsikun.seekbarpreference.SeekBarPreference;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 public class SettingsPrefActivity extends AppCompatActivity {
 
     static int PICK_IMAGE=1;
     static SettingsPref myPref;
     static int width;
+    static int height;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +41,8 @@ public class SettingsPrefActivity extends AppCompatActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         width = displayMetrics.widthPixels;
-        myPref.set_line_length(width/2);
+        height=displayMetrics.heightPixels;
+        width=min(width,height);
         // load settings fragment
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
 
@@ -80,6 +85,7 @@ public class SettingsPrefActivity extends AppCompatActivity {
 
             length=(SeekBarPreference) findPreference("line_length");
             length.setMaxValue(width);
+            length.setCurrentValue(myPref.get_line_length());
             length.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -107,7 +113,7 @@ public class SettingsPrefActivity extends AppCompatActivity {
 
                     hex_color=hex_color.concat("FF");
 
-                    //Log.d("Velo", String.valueOf(pVel.getCurrentValue()));
+                    Log.d("CCOlr",hex_color);
                     myPref.set_color(hex_color);
                     return true;
                 }
@@ -135,6 +141,7 @@ public class SettingsPrefActivity extends AppCompatActivity {
             });
 
             bgImage=findPreference("image_bg");
+
             bgImage.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
@@ -155,6 +162,7 @@ public class SettingsPrefActivity extends AppCompatActivity {
 
 
             final ColorPreference colorBg = (ColorPreference) findPreference("color_bg");
+
             colorBg.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {

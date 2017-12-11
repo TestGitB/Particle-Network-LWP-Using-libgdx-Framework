@@ -20,6 +20,7 @@ import javax.microedition.khronos.opengles.GL10;
 import static com.badlogic.gdx.Gdx.gl;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 public class LiveWallpaperScreen  implements Screen {
     Game game;
@@ -72,10 +73,7 @@ public class LiveWallpaperScreen  implements Screen {
 
 
 
-        if(SettingsPref.path.equals("0")&&SettingsPref.back_color.equals("0"))
-            textureBg = new Texture("b.jpg");
-
-        else if(SettingsPref.path.equals("0") && !SettingsPref.back_color.equals("0")) {
+        if(SettingsPref.path.equals("0")) {
 
             textureBg = new Texture("a.jpg");
             batcher.setColor(Color.valueOf(SettingsPref.back_color));
@@ -84,12 +82,16 @@ public class LiveWallpaperScreen  implements Screen {
         else {
             batcher=new SpriteBatch();
             if(Gdx.files.external(SettingsPref.path).exists()) {
+                batcher=new SpriteBatch();
                 textureBg = new Texture(Gdx.files.external(SettingsPref.path));
 
             }
-            else
-                textureBg = new Texture("b.jpg");
+            else {
+                textureBg = new Texture("a.jpg");
+                batcher.setColor(Color.valueOf(SettingsPref.back_color));
+            }
         }
+
 
         sprite=new Sprite(textureBg);
         float scale_factor= max(max_height/sprite.getHeight(),max_width/sprite.getWidth());
@@ -149,8 +151,8 @@ public class LiveWallpaperScreen  implements Screen {
 
            if(touch==1&&Gdx.input.isTouched())
            {
-               //Log.d("is touched",String.valueOf(Gdx.input.getX())+" "+String.valueOf(Gdx.input.getY()));
-               pos2=new Vector2(Gdx.input.getX(),abs(Gdx.input.getY()-max_height));
+               Log.d("is touched",String.valueOf(Gdx.input.getX())+" "+String.valueOf(Gdx.input.getY()));
+                     pos2=new Vector2(Gdx.input.getX(),abs(Gdx.input.getY()-max_height));
 
                    if (Particle.get_pos(particle[i]).dst(pos2) < line_length+200)
                    {
@@ -204,20 +206,32 @@ public class LiveWallpaperScreen  implements Screen {
     public void resume() {
         // TODO Auto-generated method stub
         Log.d("LWP resumed","True");
+        max_height=Gdx.graphics.getHeight();
+        max_width=Gdx.graphics.getWidth();
+
         particle_count=SettingsPref.size;
         velocity=SettingsPref.velocity;
         radius= SettingsPref.radius;
         touch=SettingsPref.touch;
-        line_length=SettingsPref.line_length;
         thickness=SettingsPref.thickness;
+        line_length=SettingsPref.line_length;
+        Log.d("Line lenght",String.valueOf(line_length));
+        camera = new OrthographicCamera(max_width, max_height);
+        camera.position.set(camera.viewportWidth/2 , camera.viewportHeight/2 , 0);
+        batcher = new SpriteBatch();
 
-        for(int i=0;i<particle_count;i++)
-            particle[i].velocity=velocity/300;
 
-        if(SettingsPref.path.equals("0")&&SettingsPref.back_color.equals("0"))
-            textureBg = new Texture("b.jpg");
+        //////////////////////////new particle system//////////////////////
+        particle=new Particle[200];
+        for (int i=0;i<200;i++)
+        {
+            particle[i]=new Particle(max_width,max_height,velocity);
+        }
 
-        else if(SettingsPref.path.equals("0") && !SettingsPref.back_color.equals("0")) {
+
+
+
+        if(SettingsPref.path.equals("0")) {
 
             textureBg = new Texture("a.jpg");
             batcher.setColor(Color.valueOf(SettingsPref.back_color));
@@ -226,21 +240,32 @@ public class LiveWallpaperScreen  implements Screen {
         else {
             batcher=new SpriteBatch();
             if(Gdx.files.external(SettingsPref.path).exists()) {
+                batcher=new SpriteBatch();
                 textureBg = new Texture(Gdx.files.external(SettingsPref.path));
 
             }
-            else
-                textureBg = new Texture("b.jpg");
+            else {
+                textureBg = new Texture("a.jpg");
+                batcher.setColor(Color.valueOf(SettingsPref.back_color));
+            }
         }
+
 
         sprite=new Sprite(textureBg);
         float scale_factor= max(max_height/sprite.getHeight(),max_width/sprite.getWidth());
         sprite.setSize(sprite.getWidth()*scale_factor,sprite.getHeight()*scale_factor);
         sprite.scale(scale_factor);
+        Log.d("Sprite size:", String.valueOf(sprite.getHeight()+ " "+String.valueOf(sprite.getWidth())));
+        logger = new FPSLogger();
+
+
+        world = new World(new Vector2(0, 0), true);
+
+        sr = new ShapeRenderer();
+        sr2=new ShapeRenderer();
 
         color = new Color(Color.valueOf(SettingsPref.color));
         lcolor=new Color(Color.valueOf(SettingsPref.line_color));
-
 
     }
 
