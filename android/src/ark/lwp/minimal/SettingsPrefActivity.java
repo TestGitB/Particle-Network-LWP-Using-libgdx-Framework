@@ -44,7 +44,7 @@ public class SettingsPrefActivity extends AppCompatActivity {
         width = displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
         width=min(width,height);
-        // load settings fragment
+        
         getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
 
     }
