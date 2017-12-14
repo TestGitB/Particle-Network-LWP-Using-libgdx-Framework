@@ -7,6 +7,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidLiveWallpaperService;
 import com.badlogic.gdx.backends.android.AndroidWallpaperListener;
+import com.badlogic.gdx.backends.android.surfaceview.ResolutionStrategy;
 
 public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
@@ -16,8 +17,7 @@ public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
         super.onCreateApplication();
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        config.numSamples=1;
-        //config.useGL20 = false;
+        config.numSamples=2;
         config.useCompass = false;
         config.useWakelock = false;
         config.useAccelerometer = false;

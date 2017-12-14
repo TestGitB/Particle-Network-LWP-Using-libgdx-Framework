@@ -126,7 +126,7 @@ public class LiveWallpaperScreen  implements Screen {
         batcher.draw(sprite,(max_width-sprite.getWidth())/2,(max_height-sprite.getHeight())/2,sprite.getWidth(),sprite.getHeight());
         batcher.end();
 
-        //logger.log();
+        logger.log();
         Gdx.gl.glEnable(GL10.GL_BLEND);
         Gdx.gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
 
@@ -151,7 +151,7 @@ public class LiveWallpaperScreen  implements Screen {
 
            if(touch==1&&Gdx.input.isTouched())
            {
-               Log.d("is touched",String.valueOf(Gdx.input.getX())+" "+String.valueOf(Gdx.input.getY()));
+              // Log.d("is touched",String.valueOf(Gdx.input.getX())+" "+String.valueOf(Gdx.input.getY()));
                      pos2=new Vector2(Gdx.input.getX(),abs(Gdx.input.getY()-max_height));
 
                    if (Particle.get_pos(particle[i]).dst(pos2) < line_length+200)
@@ -210,14 +210,21 @@ public class LiveWallpaperScreen  implements Screen {
         max_width=Gdx.graphics.getWidth();
         Particle.max_height=max_height;
         Particle.max_width=max_width;
+        /*
+        Particle.bound_height_top=-(max_height)/4;
+        Particle.bound_width_left=-(max_width)/4;
+        Particle.bound_height_bottom=max_height +max_width/4;
+        Particle.bound_width_right=max_width+max_width/4;
+        */
 
         particle_count=SettingsPref.size;
-        velocity=SettingsPref.velocity;
+
+        Particle.velocity=SettingsPref.velocity/300;
         radius= SettingsPref.radius;
         touch=SettingsPref.touch;
         thickness=SettingsPref.thickness;
         line_length=SettingsPref.line_length;
-        Log.d("Line lenght",String.valueOf(line_length));
+        Log.d("velo",String.valueOf(velocity));
         camera = new OrthographicCamera(max_width, max_height);
         camera.position.set(camera.viewportWidth/2 , camera.viewportHeight/2 , 0);
         batcher = new SpriteBatch();
@@ -246,7 +253,7 @@ public class LiveWallpaperScreen  implements Screen {
         float scale_factor= max(max_height/sprite.getHeight(),max_width/sprite.getWidth());
         sprite.setSize(sprite.getWidth()*scale_factor,sprite.getHeight()*scale_factor);
         sprite.scale(scale_factor);
-        Log.d("Sprite size:", String.valueOf(sprite.getHeight()+ " "+String.valueOf(sprite.getWidth())));
+       // Log.d("Sprite size:", String.valueOf(sprite.getHeight()+ " "+String.valueOf(sprite.getWidth())));
         logger = new FPSLogger();
 
 

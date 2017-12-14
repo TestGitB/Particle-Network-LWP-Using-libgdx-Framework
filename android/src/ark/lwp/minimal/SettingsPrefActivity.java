@@ -1,6 +1,7 @@
 package ark.lwp.minimal;
 
 import android.app.WallpaperManager;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -128,12 +129,17 @@ public class SettingsPrefActivity extends AppCompatActivity {
                 public boolean onPreferenceClick(Preference preference) {
 
                     myPref.set_velocity(pVel.getCurrentValue());
+                    Log.d("velocity in pref",String.valueOf(pVel.getCurrentValue()));
                     myPref.set_size(pCount.getCurrentValue());
                     myPref.set_radius(pRad.getCurrentValue());
                     myPref.set_line_length(length.getCurrentValue());
                     myPref.set_thickness(thick.getCurrentValue());
                     Intent intent = new Intent();
-                    intent.setAction(WallpaperManager.ACTION_LIVE_WALLPAPER_CHOOSER);
+                    String pkg = LiveWallpaperAndroid.class.getPackage().getName();
+                    String cls = LiveWallpaperAndroid.class.getCanonicalName();
+                    intent.setAction(WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER);
+                    intent.putExtra(WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT, new ComponentName(pkg, cls));
+
                     startActivity(intent);
 
                     return true;
@@ -226,7 +232,7 @@ public class SettingsPrefActivity extends AppCompatActivity {
 
     }
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+/*    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_main2, menu);
         return true;
@@ -240,4 +246,5 @@ public class SettingsPrefActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+   */
 }

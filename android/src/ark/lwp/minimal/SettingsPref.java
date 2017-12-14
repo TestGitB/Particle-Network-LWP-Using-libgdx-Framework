@@ -15,7 +15,7 @@ import static java.lang.Math.min;
 
 public class SettingsPref {
      static int size=30;
-     static int velocity=300;
+     static float velocity=300;
      static String path="0";
      static String color="#000000FF";
      static String line_color="#000000fF";
@@ -35,8 +35,11 @@ public class SettingsPref {
                Log.d("'First run ","true");
                line_length=min(Resources.getSystem().getDisplayMetrics().widthPixels,Resources.getSystem().getDisplayMetrics().heightPixels);
                line_length=line_length/2 -50;
+               Log.d("'linelenght ",String.valueOf(line_length));
+
                editor.putBoolean("firstrun",false);
                editor.putInt("line_length",line_length);
+               editor.commit();
           }
      }
      void set_size(int x)
@@ -51,15 +54,15 @@ public class SettingsPref {
           size=pref.getInt("size",30);
           return size;
      }
-     void set_velocity(int x)
+     void set_velocity(float x)
      {
-          editor.putInt("velocity",x);
+          editor.putFloat("velocity",x);
           editor.commit();
           velocity=x;
      }
-     int get_velocity()
+     float get_velocity()
      {
-          velocity=pref.getInt("velocity",300);
+          velocity=pref.getFloat("velocity",300);
           return velocity;
      }
 
@@ -149,6 +152,8 @@ public class SettingsPref {
      int get_line_length()
      {
           line_length=pref.getInt("line_length",300);
+          Log.d("'linel",String.valueOf(line_length));
+
           return line_length;
      }
 

@@ -26,7 +26,7 @@ android {
         applicationId "ark.lwp.minimal"
         minSdkVersion 19
         targetSdkVersion 20
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
     }

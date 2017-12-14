@@ -1,5 +1,7 @@
 package ark.lwp.minimal;
 
+import android.util.Log;
+
 import com.badlogic.gdx.math.Vector2;
 
 import static com.badlogic.gdx.math.MathUtils.cosDeg;
@@ -13,10 +15,15 @@ import static com.badlogic.gdx.math.MathUtils.sinDeg;
 public class Particle {
     float x;
     float y;
-    float velocity;
+    static float velocity;
     float angle;
     static int max_width;
     static int max_height;
+    static int bound_width_left;
+    static int bound_width_right;
+    static int bound_height_top;
+    static int bound_height_bottom;
+
 
     public Particle(int max_width,int max_height,float vel)
     {
@@ -26,6 +33,12 @@ public class Particle {
         angle=random(0,360);
         this.max_height=max_height;
         this.max_width=max_width;
+        /*bound_height_top=-(max_width)/4;
+        bound_width_left=-(max_width)/4;
+        bound_height_bottom=max_height +max_width/4;
+        bound_width_right=max_width+max_width/4;
+        */
+
     }
     public void update()
     {
@@ -50,33 +63,22 @@ public class Particle {
 
     public void check_bounds()
     {
-        if(x>max_width+200)
+        if(x>max_width+50)
         {
-            x=random(-200,-100);
-            y=random(max_height);
-            angle=random(0,360);
+            angle=random(90,270);
         }
-        else if(x<-200)
+        else if(x<-50)
         {
-            x=random(max_width+100,max_width+200);
-            y=random(max_height);
-            angle=random(0,360);
+            angle=random(-90,90);
         }
 
-
-
-
-        if(y>max_height+200)
+        if(y>max_height+50)
         {
-            y=random(-200,-100);
-            x=random(max_width);
-            angle=random(0,360);
+            angle=random(-180,0);
         }
-        else if(y<-200)
+        else if(y<-50)
         {
-            y=random(max_height+100,max_height+200);
-            x=random(max_width);
-            angle=random(0,360);
+            angle=random(0,180);
         }
     }
 

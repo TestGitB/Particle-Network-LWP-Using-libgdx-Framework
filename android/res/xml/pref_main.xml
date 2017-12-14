@@ -57,10 +57,10 @@
                 android:title="Particle Velocity"
                 android:summary="Select the speed of particles."
                 android:enabled="true"
-                android:defaultValue="500"
+                android:defaultValue="300"
                 sample:msbp_minValue="1"
-                sample:msbp_maxValue="1000"
-                sample:msbp_interval="10"
+                sample:msbp_maxValue="1500"
+                sample:msbp_interval="1"
                 sample:msbp_measurementUnit=""
                 sample:msbp_dialogEnabled="true" />
 
