@@ -13,13 +13,23 @@ import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.jaredrummler.android.colorpicker.ColorPreference;
 import com.pavelsikun.seekbarpreference.SeekBarPreference;
 
@@ -32,11 +42,17 @@ public class SettingsPrefActivity extends AppCompatActivity {
     static SettingsPref myPref;
     static int width;
     static int height;
+   private static AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_pref);
-
+        //
+        //
+        MobileAds.initialize(this, "ca-app-pub-3690357492073975~5025810258");
+        adView=(AdView)findViewById(R.id.adView9);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
         getSupportActionBar();
         myPref=new SettingsPref(getApplication());
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -44,19 +60,19 @@ public class SettingsPrefActivity extends AppCompatActivity {
         width = displayMetrics.widthPixels;
         height=displayMetrics.heightPixels;
         width=min(width,height);
-        
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new MainPreferenceFragment()).commit();
+
+        getFragmentManager().beginTransaction().replace(R.id.layoutlin,new MainPreferenceFragment()).commit();
+                //.replace(android.R.id., new MainPreferenceFragment()).commit();
 
     }
     public static class MainPreferenceFragment extends PreferenceFragment{
         Preference bgImage;
         SeekBarPreference length;
+
         @Override
         public void onCreate(final Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_main);
-           getActivity().setContentView(R.layout.activity_settings_pref);
-
 
             Preference lColorPref=findPreference("line_color");
             lColorPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {

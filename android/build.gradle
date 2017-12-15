@@ -147,5 +147,6 @@ dependencies
             compile 'com.android.support:design:25.4.0'
             compile 'com.jaredrummler:colorpicker:1.0.1'
             compile 'com.pavelsikun:material-seekbar-preference:2.3.0+'
+            compile 'com.google.android.gms:play-services-ads:11.6.0'
 
         }
