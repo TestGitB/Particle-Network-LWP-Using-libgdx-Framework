@@ -23,7 +23,7 @@ android {
         exclude 'META-INF/robovm/ios/robovm.xml'
     }
     defaultConfig {
-        applicationId "ark.lwp.minimal"
+        applicationId "ark.lwp.minimalfree"
         minSdkVersion 19
         targetSdkVersion 20
         versionCode 2
@@ -84,7 +84,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'ark.lwp.minimal/ark.lwp.minimal.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'ark.lwp.minimalfree/ark.lwp.minimalfree.AndroidLauncher'
 }
 
 // sets up the Android Eclipse project, using the old Ant based build.

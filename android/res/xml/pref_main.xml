@@ -23,7 +23,8 @@
                 android:defaultValue="0xFF000000"
                 android:key="line_color"
                 android:summary="Select the color of the line connecting particles."
-                android:title="Line Color" />
+                android:title="Line Color (Pro)"
+                android:enabled="false"/>
 
             <com.pavelsikun.seekbarpreference.SeekBarPreference
                 android:key="particle_size"
@@ -69,7 +70,8 @@
             <Preference
                 android:key="image_bg"
                 android:summary="Select background image from gallery."
-                android:title="Background Image">
+                android:title="Background Image (Pro)"
+                android:enabled="false">
 
             </Preference>
 
@@ -82,10 +84,11 @@
         </PreferenceCategory>
 
         <PreferenceCategory android:title="Misc">
-            <SwitchPreference android:title="Touch Effect"
+            <SwitchPreference android:title="Touch Effect (Pro)"
                 android:summary="Enable/Disable the touch effect."
                 android:key="touch_effect"
-                android:defaultValue="true">
+                android:defaultValue="true"
+                android:enabled="false">
 
             </SwitchPreference>
 
@@ -102,9 +105,9 @@
 
             <com.pavelsikun.seekbarpreference.SeekBarPreference
                 android:key="thick"
-                android:title="Line Thickness"
+                android:title="Line Thickness (Pro)"
                 android:summary="Select the thickness of connecting line."
-                android:enabled="true"
+                android:enabled="false"
                 android:defaultValue="2"
                 sample:msbp_minValue="1"
                 sample:msbp_maxValue="20"

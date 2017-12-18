@@ -1,6 +1,4 @@
-package ark.lwp.minimal;
-
-import android.util.Log;
+package ark.lwp.minimalfree;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -33,11 +31,6 @@ public class Particle {
         angle=random(0,360);
         this.max_height=max_height;
         this.max_width=max_width;
-        /*bound_height_top=-(max_width)/4;
-        bound_width_left=-(max_width)/4;
-        bound_height_bottom=max_height +max_width/4;
-        bound_width_right=max_width+max_width/4;
-        */
 
     }
     public void update()

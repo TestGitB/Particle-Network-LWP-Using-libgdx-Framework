@@ -1,7 +1,6 @@
-package ark.lwp.minimal;
+package ark.lwp.minimalfree;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 
 /**
  * Created by Jayan on 30-07-2017.

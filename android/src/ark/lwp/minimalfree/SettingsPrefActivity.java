@@ -1,4 +1,4 @@
-package ark.lwp.minimal;
+package ark.lwp.minimalfree;
 
 import android.app.WallpaperManager;
 import android.content.ComponentName;
@@ -13,27 +13,16 @@ import android.preference.SwitchPreference;
 import android.provider.MediaStore;
 import android.support.v4.content.CursorLoader;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Layout;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.jaredrummler.android.colorpicker.ColorPreference;
 import com.pavelsikun.seekbarpreference.SeekBarPreference;
 
-import static java.lang.Math.max;
+
 import static java.lang.Math.min;
 
 public class SettingsPrefActivity extends AppCompatActivity {
@@ -42,13 +31,12 @@ public class SettingsPrefActivity extends AppCompatActivity {
     static SettingsPref myPref;
     static int width;
     static int height;
-   private static AdView adView;
+    private static AdView adView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_pref);
-        //
-        //
+
         MobileAds.initialize(this, "ca-app-pub-3690357492073975~5025810258");
         adView=(AdView)findViewById(R.id.adView9);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -83,7 +71,6 @@ public class SettingsPrefActivity extends AppCompatActivity {
 
                     hex_color=hex_color.concat("FF");
 
-                    //Log.d("Velo", String.valueOf(pVel.getCurrentValue()));
                     myPref.set_line_color(hex_color);
                     return true;
                 }
@@ -132,6 +119,8 @@ public class SettingsPrefActivity extends AppCompatActivity {
 
                     Log.d("CCOlr",hex_color);
                     myPref.set_color(hex_color);
+                    //FREE VERSION
+                    myPref.set_line_color(hex_color);
                     return true;
                 }
             });

@@ -1,4 +1,4 @@
-package ark.lwp.minimal;
+package ark.lwp.minimalfree;
 
 import android.content.Context;
 import android.content.SharedPreferences;

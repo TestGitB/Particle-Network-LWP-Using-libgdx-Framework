@@ -1,4 +1,4 @@
-package ark.lwp.minimal;
+package ark.lwp.minimalfree;
 
 import android.util.Log;
 
@@ -7,7 +7,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 import com.badlogic.gdx.backends.android.AndroidLiveWallpaperService;
 import com.badlogic.gdx.backends.android.AndroidWallpaperListener;
-import com.badlogic.gdx.backends.android.surfaceview.ResolutionStrategy;
 
 public class LiveWallpaperAndroid extends AndroidLiveWallpaperService {
 
