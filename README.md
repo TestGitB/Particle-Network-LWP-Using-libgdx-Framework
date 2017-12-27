@@ -1,5 +1,5 @@
-# Particle-Network-LWP-Using-libgdx-Framework
-A simple implementation of libgdx to make live wallpapers.
+# Particle Network LWP Using LibGDX Framework
+A simple implementation of LibGDX to make live wallpapers.
 
 ![Alt text](/xda1.gif?raw=true "Demo")
 ![Alt text](/xda2.gif?raw=true "Demo")
